@@ -24,7 +24,25 @@ def get_locations():
 
     return monster, door, player
 
-while True:
+
+def move_player(player, move):
+  # get players location
+  # if move == LEFT, x-1
+  # if move == RIGHT, x+1
+  # if move == UP, y-1
+  # if move == DOWN, y+1
+  return player
+
+
+def get_moves(player):
+  moves = ["LEFT", "RIGHT", "UP", "DOWN"]
+  # if player's y == 0, they can't move up
+  # if player's y == 4, they can't move down
+  # if player's x == 0, they can't move left
+  # if player's x == 4, they can't move right
+  return moves
+
+downwhile True:
   print("Welcome to the Dungeon!")
   print("You're currently in room {}") #fill with player position
   print("You can move {}")  #fill with available moves
@@ -32,3 +50,12 @@ while True:
 
   move = input("> ")
   move = move.upper()
+
+  if move == 'QUIT':
+    break
+
+  # good move? Change player position
+  # bad move? Don't change anything
+  # on the door? They win!
+  # on the monster? They lose!
+  # otherwise loop back around
