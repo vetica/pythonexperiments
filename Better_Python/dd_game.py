@@ -1,9 +1,13 @@
+import logging
 import random
+
+logging.basicConfig(filename='game.log', level=logging.DEBUG)
 
 player = {'location': None, 'path': []}
 cells = [(0, 0), (0, 1), (0, 2),
          (1, 0), (1, 1), (1, 2),
          (2, 0), (2, 1), (2, 2)]
+
 
 def get_locations():
     monster = random.choice(cells)
@@ -64,6 +68,7 @@ def draw_map():
 
 
 monster, door, player['location'] = get_locations()
+logging.info('monster: {}; door: {}; player: {}'.format(monster, door, player['location']))
 
 while True:
     moves = get_moves(player['location'])
