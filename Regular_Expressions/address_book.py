@@ -26,11 +26,14 @@ names_file.close()
 #     ''', data, re.X))
 
 line = re.compile(r'''
-    ^(?P<name>[-\w ]*,\s[-\w ]+)\t #last and first names
+    ^(?P<name>(?P<last>[-\w ]*),\s(?P<first>[-\w ]+))\t #last and first names
     (?P<email>[-\w\d.+]+@[-\w\d.]+)\t #email
     (?P<phone>\(?\d{3}\)?\s?-?\d{3}-\d{4})?\t #phone number
     (?P<job>[\w\s]+,\s[\w\s.]+)\t? #job and company
     (?P<twitter>@[\w\d]+)?$ #twitter
 ''', re.X | re.M)
 
-print(line.search(data).groupdict())
+#print(line.search(data).groupdict())
+
+for match in line.finditer(data):
+    print('{first} {last} <{email}>'.format(**match.groupdict()))
