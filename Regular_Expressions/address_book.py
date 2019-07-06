@@ -6,4 +6,5 @@ names_file.close()
 
 # print(re.match(r'Love', data))
 # print(re.search(r'Kenneth', data))
-print(re.search(r'\(\d\d\d\) \d\d\d-\d\d\d\d', data))
+#print(re.findall(r'\(?\d{3}\)?-?\s?\d{3}-\d{4}', data))
+print(re.findall(r'\w*, \w+', data))
