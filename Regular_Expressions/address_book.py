@@ -18,9 +18,19 @@ names_file.close()
 #     \b  # match another word boundary
 #    ''', data, re.VERBOSE |))
 
-print(re.findall(r'''
-    \b[-\w]* #Find a word boundary, 1+ hyphens or characters, and a comma
-    \s  #find 1 whitespace
-    [-\w ]+  #1+ hyphens and characters and explicit spaces
-    [^\t\n] #Ignore tabs and newlines
-    ''', data, re.X))
+# print(re.findall(r'''
+#     \b[-\w]* #Find a word boundary, 1+ hyphens or characters, and a comma
+#     \s  #find 1 whitespace
+#     [-\w ]+  #1+ hyphens and characters and explicit spaces
+#     [^\t\n] #Ignore tabs and newlines
+#     ''', data, re.X))
+
+line = re.compile(r'''
+    ^(?P<name>[-\w ]*,\s[-\w ]+)\t #last and first names
+    (?P<email>[-\w\d.+]+@[-\w\d.]+)\t #email
+    (?P<phone>\(?\d{3}\)?\s?-?\d{3}-\d{4})?\t #phone number
+    (?P<job>[\w\s]+,\s[\w\s.]+)\t? #job and company
+    (?P<twitter>@[\w\d]+)?$ #twitter
+''', re.X | re.M)
+
+print(line.search(data).groupdict())
